@@ -1,5 +1,5 @@
 from google import genai
-
+import os
 MODEL_NAME = "gemini-3-flash-preview"
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY","")
 
