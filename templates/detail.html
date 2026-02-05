@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }}{% endblock %}
+
+{% block content %}
+<div class="route-pages fade-in">
+    <div class="page-container">
+        <h1>{{ page.title }}</h1>
+        <img src="{{ page.image }}" alt="{{ page.title }}">
+
+
+        <p>{{ page.content }}</p>
+
+
+        {% if page.bio %}
+        <p style="margin-top: 20px; font-style: italic; color: #aab2c0;">
+            {{ page.bio }}
+        </p>
+        {% endif %}
+
+
+        {% if links %}
+        <div class="links-list">
+            {% for link in links %}
+            <div class="link-row">
+                <a class="link-card" href="{{ link.url }}" target="_blank">
+                    {{ link.name }}
+                </a>
+                <div class="link-actions">
+                    <a href="{{ url_for('edit_link', link_id=link.id) }}" class="edit-btn btn">Edit</a>
+                    <form method="POST" action="{{ url_for('delete_link', link_id=link.id) }}" class="delete-form">
+                        <button type="submit" class="delete-btn btn">Delete</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+
+        <form method="POST" action="{{ url_for('add_link', page_id=page.id) }}" style="margin-top: 30px;">
+            <input type="text" name="name" placeholder="Link name" required>
+            <input type="url" name="url" placeholder="https://example.com" required>
+            <input type="text" name="category" placeholder="Category (optional)">
+            <button type="submit">Add Link</button>
+        </form>
+
+
+        <div class="page-links">
+            <a href="{{ url_for('pages') }}">← Back</a>
+            <a href="{{ url_for('index') }}">Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

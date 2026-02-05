@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Create New Page{% endblock %}
+
+{% block content %}
+<div class="route-pages fade-in">
+    <div class="page-container">
+        <h1>Create Your Page</h1>
+
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
+
+        <form method="POST">
+            <input type="text" name="title" placeholder="Page Title" value="{{ title if title else '' }}" required>
+
+            <input type="text" name="name" placeholder="Your Name" value="{{ name if name else '' }}">
+
+            <textarea name="info" placeholder="Tell AI something about you...">{{ info if info else '' }}</textarea>
+
+            <select name="style">
+                <option value="professional" {% if style == 'professional' %}selected{% endif %}>Professional</option>
+                <option value="funny" {% if style == 'funny' %}selected{% endif %}>Funny</option>
+            </select>
+
+            <textarea name="bio" placeholder="Bio description">{{ bio if bio else '' }}</textarea>
+
+            <input type="text" name="image" placeholder="Image URL" value="{{ image if image else '' }}">
+
+            <div class="actions">
+                <button type="submit" name="action" value="ai">Generate Bio with AI</button>
+                <button type="submit" name="action" value="save">Save Page</button>
+            </div>
+        </form>
+
+        <div class="preview-section">
+            <h3>Preview:</h3>
+            <h4>{{ title }}</h4>
+            <p>{{ bio }}</p>
+        </div>
+
+        <div class="page-links">
+            <a href="{{ url_for('pages') }}">Go to  Pages list</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

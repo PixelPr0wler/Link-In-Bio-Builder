@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Link{% endblock %}
+
+{% block content %}
+<div class="container fade-in">
+    <h2>Edit Link</h2>
+    <form method="POST">
+        <input type="text" name="name" placeholder="Link Name" value="{{ link.name }}" required>
+        <input type="url" name="url" placeholder="https://example.com" value="{{ link.url }}" required>
+        <input type="text" name="category" placeholder="Category" value="{{ link.category }}">
+        <button type="submit">Save Changes</button>
+    </form>
+    <a href="{{ url_for('page', id=link.page_id) }}">← Back to Page</a>
+</div>
+{% endblock %}
