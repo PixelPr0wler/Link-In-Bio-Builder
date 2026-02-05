@@ -1,7 +1,7 @@
 from google import genai
-
+import os
 MODEL_NAME = "gemini-3-flash-preview"
-GEMINI_API_KEY = "Put your api key here"
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY","")
 
 def generate_bio(name: str,info: str,style: str) -> str:
     api_key=GEMINI_API_KEY
